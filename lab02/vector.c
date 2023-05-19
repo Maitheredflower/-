@@ -26,12 +26,14 @@ vector_t *bad_vector_new()
     /* Create the vector and a pointer to it */
     vector_t *retval, v;
     retval = &v;
+    // 没有给retval动态分配内存
 
     /* Initialize attributes */
     retval->size = 1;
     retval->data = malloc(sizeof(int));
     if (retval->data == NULL)
     {
+        // 没有将retval资源释放
         allocation_failed();
     }
 
@@ -50,6 +52,7 @@ vector_t also_bad_vector_new()
     v.data = malloc(sizeof(int));
     if (v.data == NULL)
     {
+        // 没有将retval资源释放
         allocation_failed();
     }
     v.data[0] = 0;
