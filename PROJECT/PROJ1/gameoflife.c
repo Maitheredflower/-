@@ -17,19 +17,19 @@
 #include <inttypes.h>
 #include "imageloader.h"
 
-//Determines what color the cell at the given row/col should be. This function allocates space for a new Color.
-//Note that you will need to read the eight neighbors of the cell in question. The grid "wraps", so we treat the top row as adjacent to the bottom row
-//and the left column as adjacent to the right column.
+// Determines what color the cell at the given row/col should be. This function allocates space for a new Color.
+// Note that you will need to read the eight neighbors of the cell in question. The grid "wraps", so we treat the top row as adjacent to the bottom row
+// and the left column as adjacent to the right column.
 Color *evaluateOneCell(Image *image, int row, int col, uint32_t rule)
 {
-	//YOUR CODE HERE
+	// YOUR CODE HERE
 }
 
-//The main body of Life; given an image and a rule, computes one iteration of the Game of Life.
-//You should be able to copy most of this from steganography.c
+// The main body of Life; given an image and a rule, computes one iteration of the Game of Life.
+// You should be able to copy most of this from steganography.c
 Image *life(Image *image, uint32_t rule)
 {
-	//YOUR CODE HERE
+	// YOUR CODE HERE
 }
 
 /*
@@ -49,5 +49,5 @@ You may find it useful to copy the code from steganography.c, to start.
 */
 int main(int argc, char **argv)
 {
-	//YOUR CODE HERE
+	// YOUR CODE HERE
 }
