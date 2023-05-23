@@ -55,6 +55,10 @@
         "queue": "c",
         "set": "c",
         "stack": "c",
-        "vector.h": "c"
+        "vector.h": "c",
+        "cstdint": "c",
+        "__atomic_derived": "c",
+        "__atomic_generated": "c",
+        "imageloader.h": "c"
     }
 }
