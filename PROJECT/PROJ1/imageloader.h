@@ -23,3 +23,6 @@ extern void writeData(Image *image);
 
 // Frees an image and all its associated data
 extern void freeImage(Image *image);
+
+// count living neighbors
+int count_neighbor_live(Image *image, int row, int col, int count);

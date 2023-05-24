@@ -40,7 +40,7 @@ Image *steganography(Image *image)
 	// YOUR CODE HERE
 	if (image == NULL)
 	{
-		printf("传入一个空指针");
+		printf("passed a NULL pointer");
 		return NULL;
 	}
 	for (int i = 0; i < image->rows; i++)
@@ -51,7 +51,7 @@ Image *steganography(Image *image)
 			if (color == NULL)
 			{
 				free(color);
-				printf("evaluateOnePixel失败");
+				printf("evaluateOnePixel failed");
 				return NULL;
 			}
 			uint8_t blue = color->B;

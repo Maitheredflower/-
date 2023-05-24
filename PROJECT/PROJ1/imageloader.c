@@ -82,9 +82,9 @@ void writeData(Image *image)
 		printf("%d %d\n", image->cols, image->rows);
 		printf("255\n");
 		// 按照行列数进行输出，每次输出一个像素(Color)
-		for (int i = 0; i < image->cols; i++)
+		for (int i = 0; i < image->rows; i++)
 		{
-			for (int j = 0; j < image->rows; j++)
+			for (int j = 0; j < image->cols; j++)
 			{
 				if (j == 0)
 				{
