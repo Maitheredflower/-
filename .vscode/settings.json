@@ -59,6 +59,9 @@
         "cstdint": "c",
         "__atomic_derived": "c",
         "__atomic_generated": "c",
-        "imageloader.h": "c"
+        "imageloader.h": "c",
+        "chrono": "c",
+        "__functional_base_03": "c",
+        "limits": "c"
     }
 }
