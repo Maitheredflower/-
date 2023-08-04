@@ -77,7 +77,11 @@ main:
 # Think: why might having a1 be useful?
 f:
     # YOUR CODE GOES HERE!
-
+    addi a0, a0, 3  # x+3
+    addi t0, x0, 4 
+    mul a0, a0, t0 # (x+3) *4
+    add a1, a0, a1 # a1为对应数的地址
+    lw a0,  0(a1)
     jr ra               # Always remember to jr ra after your function!
 
 print_int:
