@@ -14,41 +14,26 @@
 # ==============================================================================
 relu:
     # Prologue
-    addi sp, sp, -8
-    sw ra, 4(sp)
-    sw s0, 0(sp)
-
     # 检查数组长度
-    sltiu s0, a1, 1
-    bnez s0, exception
+    addi t0, x0, 1
+    bgt a1,  t0, no_exception
+    li a1, 78
+    j exit2 #返回error code 78    
 
-    li s0, 0
+no_exception:
+    addi t0, x0, 0
 
 loop_start:
-    beq s0, a1, loop_end
-    sll t0, s0, 2
-    add t1, a0, t0
-    lw t1, 0(t0)
-    
-
-exception:
-
-    
-
-
-
-
-
-
+    lw t1, 0(a0)    # t1 = a[i] t0 = i
+    bge t1, x0, loop_continue
+    sw x0, 0(a0) #ReLU: 负数变为0
 
 loop_continue:
-
-
+    addi t0, t0, 1
+    addi a0, a0, 4 # a0地址+4得到下一个数据的地址a[i]
+    beq t0, a1, loop_end
+    j loop_start
 
 loop_end:
-
-
     # Epilogue
-
-    
 	ret

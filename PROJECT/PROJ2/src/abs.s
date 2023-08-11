@@ -20,8 +20,5 @@ abs:
     sub a0, zero, a0
     
 done:
-    ret
-
     # Epilogue
-
     ret
