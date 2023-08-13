@@ -13,31 +13,36 @@
 # Exceptions:
 # - If the length of the vector is less than 1,
 #   this function terminates the program with error code 77.
-# s0: a[i]  s1: i t2: max
+# s0: a[i]  s1: i s2: max
 # =================================================================
 argmax:
     # Prologue
     # determine the length of the array
-    addi t1, x0, 1
-    bge a1, t1, no_exception
+    addi t0, x0, 1
+    bge a1, t0, no_exception
     li a1, 77 #error_code: 77
     j exit2
 
 no_exception:
-    addi sp, sp, -8
+    addi sp, sp, -12
     sw s0, 0(sp)
     sw s1, 4(sp)
-    addi s1, x0, 0
-    lw s0, 0(a0)
+    sw s2, 8(sp)
+    mv s0, a0
+    mv s1, a1
+    addi s2, x0, 0
+    lw t0, 0(s0)
+    li t2, 0 
 
 loop_start:
-    addi t1, t1, 1
-    addi a0, a0, 4
-    bgt t1, a1, loop_end
-    lw t0, 0(a0)
-    ble t0, s0, loop_continue   #比大小
-    mv s0, t0
-    mv s1, t1
+    addi t2, t2, 1
+    beq t2, s1, loop_end
+    addi s0, s0, 4
+    lw t1, 0(s0)
+    ble t1, t0, loop_continue   #比大小
+    mv s2, t2
+    mv t0, t1
+    j loop_start
 
 
 loop_continue:
@@ -45,8 +50,9 @@ loop_continue:
 
 loop_end:
     # Epilogue
-    mv a0, s1
+    mv a0, s2
     lw s0, 0(sp)
     lw s1, 4(sp)
-    addi sp, sp, 8
+    lw s2, 8(sp)
+    addi sp, sp, 12
     ret
