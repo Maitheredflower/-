@@ -1,0 +1,7 @@
+Op#	ALUSel	InputA		InputB		ALU_Output
+00	e	7435daa4	62381add	66926794
+01	e	ffffdead	ffffbeef	08784983
+02	e	ffffdead	63234d49	4e978855
+03	e	efffffff	ac273deb	a3d8c215
+04	e	00000010	f0000000	00000000
+05	e	00010000	00010000	00000000
