@@ -919,10 +919,6 @@ end TCL_Generic;
       <a name="facing" val="east"/>
       <a name="label" val="write_en_and_rd_1"/>
     </comp>
-    <comp lib="0" loc="(520,1620)" name="Tunnel">
-      <a name="facing" val="east"/>
-      <a name="label" val="write_en_and_rd_1"/>
-    </comp>
     <comp lib="0" loc="(520,1670)" name="Tunnel">
       <a name="facing" val="east"/>
       <a name="label" val="clk"/>
@@ -1136,10 +1132,6 @@ end TCL_Generic;
     <comp lib="0" loc="(630,240)" name="Tunnel">
       <a name="facing" val="north"/>
       <a name="label" val="sp"/>
-      <a name="width" val="32"/>
-    </comp>
-    <comp lib="0" loc="(650,1600)" name="Tunnel">
-      <a name="label" val="ra"/>
       <a name="width" val="32"/>
     </comp>
     <comp lib="0" loc="(650,1600)" name="Tunnel">

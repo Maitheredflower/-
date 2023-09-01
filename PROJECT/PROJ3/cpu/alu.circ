@@ -266,10 +266,6 @@ end TCL_Generic;
       <a name="label" val="ALUSel"/>
       <a name="width" val="4"/>
     </comp>
-    <comp lib="0" loc="(220,310)" name="Tunnel">
-      <a name="label" val="ALUSel"/>
-      <a name="width" val="4"/>
-    </comp>
     <comp lib="0" loc="(490,2270)" name="Tunnel">
       <a name="facing" val="east"/>
       <a name="label" val="or2"/>
