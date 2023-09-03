@@ -396,7 +396,6 @@ end TCL_Generic;
       <a name="label" val="output_x31"/>
       <a name="width" val="32"/>
     </comp>
-    <comp lib="0" loc="(1700,3250)" name="Pin"/>
     <comp lib="0" loc="(1790,1590)" name="Tunnel">
       <a name="facing" val="east"/>
       <a name="label" val="write_data"/>
@@ -488,9 +487,9 @@ end TCL_Generic;
       <a name="facing" val="east"/>
       <a name="label" val="clk"/>
     </comp>
-    <comp lib="0" loc="(1810,3250)" name="Bit Extender">
-      <a name="in_width" val="1"/>
-      <a name="out_width" val="32"/>
+    <comp lib="0" loc="(1810,3250)" name="Constant">
+      <a name="value" val="0x0"/>
+      <a name="width" val="32"/>
     </comp>
     <comp lib="0" loc="(1900,3250)" name="Tunnel">
       <a name="label" val="x0"/>
@@ -1594,7 +1593,6 @@ end TCL_Generic;
     <wire from="(1480,3000)" to="(1510,3000)"/>
     <wire from="(1480,3230)" to="(1510,3230)"/>
     <wire from="(1580,320)" to="(1580,540)"/>
-    <wire from="(1700,3250)" to="(1770,3250)"/>
     <wire from="(1790,1590)" to="(1800,1590)"/>
     <wire from="(1790,1640)" to="(1830,1640)"/>
     <wire from="(1790,1690)" to="(1800,1690)"/>
