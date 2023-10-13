@@ -65,7 +65,7 @@ int allocate_matrix(matrix **mat, int rows, int cols)
 {
     if (rows <= 0 || cols <= 0)
     {
-        printf("Rows or/and cols are invalid\n");
+        printf("\nRows or/and cols are invalid");
         return -1; // 出现了错误矩阵情况
     }
 
@@ -74,7 +74,7 @@ int allocate_matrix(matrix **mat, int rows, int cols)
 
     if (*mat == NULL)
     {
-        printf("Error when alloc memory for *mat\n");
+        printf("\nError when alloc memory for *mat");
         return -1; // 分配错误时 throw a runtime error
     }
 
@@ -95,7 +95,7 @@ int allocate_matrix(matrix **mat, int rows, int cols)
     (*mat)->data = (double **)malloc(rows * sizeof(double *));
     if ((*mat)->data == NULL)
     {
-        printf("Error when alloc memory for (*mat)->data\n");
+        printf("\nError when alloc memory for (*mat)->data");
         free((*mat)); // 先释放掉原来分配的内存空间
         return -1;
     }
@@ -104,7 +104,7 @@ int allocate_matrix(matrix **mat, int rows, int cols)
         (*mat)->data[i] = (double *)malloc(cols * sizeof(double));
         if ((*mat)->data[i] == NULL)
         {
-            printf("Error when alloc memory for (*mat)->data[i]\n");
+            printf("\nError when alloc memory for (*mat)->data[i]");
             free((*mat)->data);
             free((*mat)); // 释放掉原来分配的内存空间
             return -1;
@@ -125,12 +125,11 @@ int allocate_matrix(matrix **mat, int rows, int cols)
  * If you don't set python error messages here upon failure, then remember to set it in numc.c.
  * Return 0 upon success and non-zero upon failure.
  */
-int allocate_matrix_ref(matrix **mat, matrix *from, int row_offset, int col_offset,
-                        int rows, int cols)
+int allocate_matrix_ref(matrix **mat, matrix *from, int row_offset, int col_offset, int rows, int cols)
 {
     if (rows <= 0 || cols <= 0)
     {
-        printf("Rows or/and cols are invalid\n");
+        printf("\nRows or/and cols are invalid");
         return 1; // 出现了错误矩阵情况
     }
 
@@ -138,13 +137,15 @@ int allocate_matrix_ref(matrix **mat, matrix *from, int row_offset, int col_offs
     *mat = (matrix *)malloc(sizeof(matrix));
     if (mat == NULL)
     {
-        printf("Error when alloc memory for *mat\n");
+        printf("\nError when alloc memory for *mat");
         return 1;
     }
 
     (*mat)->cols = cols;
     (*mat)->rows = rows;
-    (*mat)->parent = NULL;
+    (*mat)->ref_cnt = 1;
+    (*mat)->parent = from;
+    (*mat)->parent->ref_cnt = (*mat)->parent->ref_cnt + (*mat)->ref_cnt;
 
     if (rows == 1 || cols == 1)
     {
@@ -158,7 +159,7 @@ int allocate_matrix_ref(matrix **mat, matrix *from, int row_offset, int col_offs
     (*mat)->data = (double **)malloc(rows * sizeof(double *));
     if ((*mat)->data == NULL)
     {
-        printf("Error when alloc memory for (*mat)->data\n");
+        printf("\nError when alloc memory for (*mat)->data");
         free(*mat);
         return -1;
     }
@@ -170,13 +171,13 @@ int allocate_matrix_ref(matrix **mat, matrix *from, int row_offset, int col_offs
         {
             free((*mat)->data);
             free(*mat);
-            printf("Error when alloc memory for (*mat)->data[i]\n");
+            printf("\nError when alloc memory for (*mat)->data[i]");
             return -1;
         }
 
         for (int j = 0; j < cols; j++)
         {
-            (*mat)->data[i][j] = 0;
+            (*mat)->data[i][j] = from->data[i + row_offset][j + col_offset];
         }
     }
 
@@ -192,7 +193,11 @@ int allocate_matrix_ref(matrix **mat, matrix *from, int row_offset, int col_offs
  */
 void deallocate_matrix(matrix *mat)
 {
-    if (mat->ref_cnt == 1 && mat->parent == NULL)
+    if (mat == NULL)
+    {
+        printf("\n*mat is NULL");
+    }
+    else if (mat->ref_cnt == 1 && mat->parent == NULL)
     {
         for (int i = 0; i < mat->rows; i++)
         {
@@ -202,7 +207,7 @@ void deallocate_matrix(matrix *mat)
     }
     else
     {
-        printf("There has at least 1 matrice is referring this data array");
+        printf("\nThere has at least 1 matrice is referring this data array");
     }
 }
 
@@ -214,7 +219,7 @@ double get(matrix *mat, int row, int col)
 {
     if (mat == NULL)
     {
-        printf("*mat is NULL");
+        printf("\n*mat is NULL");
         {
             return -1;
         }
@@ -253,7 +258,7 @@ int add_matrix(matrix *result, matrix *mat1, matrix *mat2)
 {
     if (mat1 == NULL || mat2 == NULL || result == NULL)
     {
-        printf("*mat is NULL");
+        printf("\n*mat is NULL");
         {
             return -1;
         }
@@ -265,7 +270,7 @@ int add_matrix(matrix *result, matrix *mat1, matrix *mat2)
     cols2 = mat2->cols;
     if (rows1 != rows2 || cols1 != cols2)
     {
-        printf("Rows or/and cols are not equal");
+        printf("\nRows or/and cols are not equal");
         return -1;
     }
     for (int i = 0; i < rows1; i++)
@@ -286,7 +291,7 @@ int sub_matrix(matrix *result, matrix *mat1, matrix *mat2)
 {
     if (mat1 == NULL || mat2 == NULL || result == NULL)
     {
-        printf("*mat is NULL");
+        printf("\n*mat is NULL");
         {
             return -1;
         }
@@ -298,7 +303,7 @@ int sub_matrix(matrix *result, matrix *mat1, matrix *mat2)
     cols2 = mat2->cols;
     if (rows1 != rows2 || cols1 != cols2)
     {
-        printf("Rows or/and cols are not equal");
+        printf("\nRows or/and cols are not equal");
         return -1;
     }
     for (int i = 0; i < rows1; i++)
@@ -320,7 +325,7 @@ int mul_matrix(matrix *result, matrix *mat1, matrix *mat2)
 {
     if (mat1 == NULL || mat2 == NULL || result == NULL)
     {
-        printf("*mat is NULL");
+        printf("\n*mat is NULL");
         {
             return -1;
         }
@@ -334,7 +339,7 @@ int mul_matrix(matrix *result, matrix *mat1, matrix *mat2)
     cols_result = result->cols;
     if (rows1 != rows_result || cols1 != rows2 || cols2 != cols_result)
     {
-        printf("mul_matrix:rows or/and cols are not equal");
+        printf("\nmul_matrix:rows or/and cols are not equal");
         return -1;
     }
     for (int k = 0; k < cols2; k++)
@@ -359,7 +364,7 @@ int pow_matrix(matrix *result, matrix *mat, int pow)
 {
     if (mat->cols != mat->rows)
     {
-        printf("pow_matrix:rows is not equal cols");
+        printf("\npow_matrix:rows is not equal cols");
         return -1;
     }
     matrix *temp;
@@ -406,7 +411,7 @@ int neg_matrix(matrix *result, matrix *mat)
 {
     if (mat == NULL)
     {
-        printf("*mat is NULL");
+        printf("\n*mat is NULL");
         {
             return -1;
         }
@@ -429,7 +434,7 @@ int abs_matrix(matrix *result, matrix *mat)
 {
     if (mat == NULL)
     {
-        printf("*mat is NULL");
+        printf("\n*mat is NULL");
         {
             return -1;
         }
